@@ -66,7 +66,7 @@ export default function Contact() {
 
     // Contact person information
   const contactPerson = {
-        pattabiram: {
+      ambattur: {
       name: "Mrs. Fathima Joseph",
       phone: "+91 97108 36760",
       email: "thaaihostelchennai@gmail.com",
