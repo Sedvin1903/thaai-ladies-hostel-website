@@ -64,6 +64,16 @@ export default function Contact() {
     pattabiram: "Pattabiram Branch"
   };
 
+    // Contact person information
+  const contactPerson = {
+    pattabiram: {
+      name: "Mrs. Fathima Joseph",
+      phone: "+91 97108 36760",
+      email: "thaaihostelchennai@gmail.com",
+      whatsapp: "+91 97108 36760"
+    }
+  };
+
   return (
     <section id="contact" className="section bg-white-50">
       <div className="container grid md:grid-cols-2 gap-8 items-start">
@@ -75,6 +85,48 @@ export default function Contact() {
               {locationNames[branch]}
             </div>
           </div>
+
+                   {/* Contact Person Card */}
+          <div className="bg-gradient-to-r from-pink-50 to-indigo-50 rounded-lg p-4 mb-6 border border-pink-100">
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                {contactPerson[branch]?.name?.split(' ').map(n => n[0]).join('') || 'RK'}
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900">{contactPerson[branch]?.name}</h3>
+                <div className="space-y-1">
+                  <a 
+                    href={`tel:${contactPerson[branch]?.phone}`}
+                    className="flex items-center gap-2 text-sm text-pink-600 hover:text-pink-800 transition-colors"
+                  >
+                    <span>☎️</span>
+                    {contactPerson[branch]?.phone}
+                  </a>
+                  <a 
+                    href={`mailto:${contactPerson[branch]?.email}`}
+                    className="flex items-center gap-2 text-sm text-pink-600 hover:text-pink-800 transition-colors"
+                  >
+                    <span>🖂</span>
+                    {contactPerson[branch]?.email}
+                  </a>
+                  <a 
+                    href={`https://wa.me/${contactPerson[branch]?.whatsapp?.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-green-600 hover:text-green-800 transition-colors"
+                  >
+                    <span>📞</span>
+                    WhatsApp : {contactPerson[branch]?.whatsapp}
+                  </a>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
           <form ref={formRef} onSubmit={onSubmit} className="mt-6 grid gap-3">
             <input className="border rounded-md px-3 py-2" name="from_name" placeholder="Your name" required />
             <input className="border rounded-md px-3 py-2" name="reply_to" type="email" placeholder="Email"  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"  title="Please enter a valid email address" required />
