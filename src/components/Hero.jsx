@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useBranch } from "@/context/BranchContext";
+import OfferPopup from "./OfferPopup";
 
 export default function Hero() {
   const { branch } = useBranch();
@@ -14,7 +15,9 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="section bg-pink-50/50">
+    <>
+      <OfferPopup />
+      <section id="hero" className="section bg-pink-50/50">
       <div className="container grid md:grid-cols-2 gap-8 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,5 +66,6 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }

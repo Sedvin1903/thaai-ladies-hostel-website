@@ -15,9 +15,11 @@ const sections = [
 export default function Navbar() {
   const { branch, setBranch } = useBranch();
   const [open, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
+    setIsMounted(true);
     const handler = () => setOpen(false);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
@@ -56,16 +58,17 @@ export default function Navbar() {
         <div className="font-semibold text-lg">Thaai Ladies Hostel</div>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex items-center gap-6">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => onNav(s.id)}
-              className="text-sm hover:text-pink-600 rounded-full px-3 py-1 transition"
-            >
-              {s.label}
-            </button>
-          ))}
+        {isMounted && (
+          <div className="hidden md:flex items-center gap-6">
+            {sections.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => onNav(s.id)}
+                className="text-sm hover:text-pink-600 rounded-full px-3 py-1 transition"
+              >
+                {s.label}
+              </button>
+            ))}
 
           {/* Branch dropdown */}
           <div className="relative" ref={dropdownRef}>
@@ -114,34 +117,39 @@ export default function Navbar() {
             )}
           </div>
         </div>
+        )}
 
         {/* Mobile menu */}
-        <div className="md:hidden">
-          <select
-            className="bg-pink-600 text-white rounded-full px-3 py-2 text-sm border-0 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-300"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
-          >
-            <option value="ambattur">📍 Ambattur</option>
-            <option value="pattabiram">📍 Pattabiram</option>
-          </select>
-        </div>
+        {isMounted && (
+          <div className="md:hidden">
+            <select
+              className="bg-pink-600 text-white rounded-full px-3 py-2 text-sm border-0 shadow-md focus:outline-none focus:ring-2 focus:ring-pink-300"
+              value={branch}
+              onChange={(e) => setBranch(e.target.value)}
+            >
+              <option value="ambattur">📍 Ambattur</option>
+              <option value="pattabiram">📍 Pattabiram</option>
+            </select>
+          </div>
+        )}
       </nav>
 
       {/* Mobile nav buttons */}
-      <div className="md:hidden border-t rounded-b-xl">
-        <div className="container flex items-center justify-between py-2 gap-2 overflow-x-auto">
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => onNav(s.id)}
-              className="text-sm whitespace-nowrap px-3 py-1 rounded-full hover:bg-gray-50 transition"
-            >
-              {s.label}
-            </button>
-          ))}
+      {isMounted && (
+        <div className="md:hidden border-t rounded-b-xl">
+          <div className="container flex items-center justify-between py-2 gap-2 overflow-x-auto">
+            {sections.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => onNav(s.id)}
+                className="text-sm whitespace-nowrap px-3 py-1 rounded-full hover:bg-gray-50 transition"
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

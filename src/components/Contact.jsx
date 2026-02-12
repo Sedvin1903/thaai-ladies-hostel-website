@@ -133,6 +133,7 @@ export default function Contact() {
 
 
 
+          {isClient && (
           <form ref={formRef} onSubmit={onSubmit} className="mt-6 grid gap-3">
             <input className="border rounded-md px-3 py-2" name="from_name" placeholder="Your name" required />
             <input className="border rounded-md px-3 py-2" name="reply_to" type="email" placeholder="Email"  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"  title="Please enter a valid email address" required />
@@ -143,6 +144,7 @@ export default function Contact() {
             {buttonLabel}
             </button>
           </form>
+        )}
         </div>
         <div>
           <div className="aspect-[4/3] w-full rounded-md overflow-hidden border bg-white">
